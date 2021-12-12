@@ -61,10 +61,18 @@ public class EmployeeController {
 		
 		return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 	}
-	
-	
-	
-	
-	
+	@GetMapping(value = "/v1/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Integer id){
+		if(employeeCache.containsKey(id)) {
+
+			Employee employee =  employeeCache.get(id);
+
+			return new ResponseEntity<>(employee,HttpStatus.OK);
+			
+		}
+		
+
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	
 }
